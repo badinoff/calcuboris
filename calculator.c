@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include "version.h"
-//#include <cs50.h>
+#ifdef _WIN32
+#include <conio.h>
+#endif
 
 #define MIN 1
 #define MAX 4
-
 
 //math functions prototypes
 float add(float x, float y);
@@ -17,62 +18,51 @@ int get_operation(void);
 void show_menu(void);
 
 int main(void)
-    {
-        float x, y;
+{
+    float x, y;
+    int c;
 
-        printf("CalcuBoris v%d.%d.%02d -- Press Enter", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
-        int c = getchar();
-        while (c != '\n' && c != EOF) c = getchar();
+    printf("CalcuBoris v%d.%d.%02d -- Press Enter", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
+    c = getchar();
+    while (c != '\n' && c != EOF) c = getchar();
 
+    do {
         int valid_input;
-
-        do
-        {
+        do {
             printf("Please enter your first number: ");
-            valid_input = scanf("%f", & x);
+            valid_input = scanf("%f", &x);
             while (getchar() != '\n');
         } while (valid_input != 1);
         
-        do
-        {
+        do {
             printf("Please enter your second number: ");
-            valid_input = scanf("%f", & y);
+            valid_input = scanf("%f", &y);
             while (getchar() != '\n');
         } while (valid_input != 1);
         
-show_menu();
-        
+        show_menu();
         int op = get_operation();
 
         float result;
-        switch (op)
-        {
-            case 1:
-                result = add(x, y); // Returns float
-                printf("\nResult: %.5f\n", result); // %f for float
-            break;
-
-            case 2:
-                result = subtract(x, y); // Returns float
-                printf("\nResult: %.5f\n", result); // %f for float
-            break;
-
-            case 3:
-                result = multiply(x, y); // Returns float
-                printf("\nResult: %.5f\n", result); // %f for float
-            break;
-
-            case 4:
-                result = divide(x, y); // Returns float
-                printf("\nResult: %.5f\n", result); // %f for float
-            break;
-
-        default:
-            break;
+        switch (op) {
+            case 1: result = add(x, y); printf("\nResult: %.5f\n", result); break;
+            case 2: result = subtract(x, y); printf("\nResult: %.5f\n", result); break;
+            case 3: result = multiply(x, y); printf("\nResult: %.5f\n", result); break;
+            case 4: result = divide(x, y); printf("\nResult: %.5f\n", result); break;
+            default: break;
         }
-        return 0;
-        
-    }
+
+        printf("To exit press 'q', to perform another calculation, press Enter\n");
+        while (getchar() != '\n');  // Flush
+#ifdef _WIN32
+        c = _getch();  // Instant q on Windows
+#else
+        c = getchar();  // q+Enter on Linux
+#endif
+    } while (c != 'q');
+    
+    return 0;
+}
 
 int get_operation(void)
     {
@@ -122,4 +112,4 @@ float divide(float x, float y)
         return x / y;
     }
 
-    // Test v1.1.02
+    // Test v1.1.03
