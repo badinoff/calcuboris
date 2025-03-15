@@ -1,0 +1,4 @@
+Version 1.4.10 - 2025-03-15
+- Split calculator.c into main.c, math.c, and ui.c for improved modularity.
+- Removed obsolete calculator.c.
+- Updated to 1.4.10 to mark the refactor milestone.

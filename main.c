@@ -1,21 +1,11 @@
 #include <stdio.h>
 #include "version.h"
+#include "math.h"
+#include "ui.h"
 #ifdef _WIN32
 #include <conio.h>
 #endif
 
-#define MIN 1
-#define MAX 4
-
-// Math function prototypes
-float add(float x, float y);
-float subtract(float x, float y);
-float multiply(float x, float y);
-float divide(float x, float y);
-
-// Existing prototypes
-int get_operation(void);
-void show_menu(void);
 
 int main(void)
 {
@@ -74,57 +64,4 @@ int main(void)
     } while (c != 'q');
     
     return 0;
-}
-
-int get_operation(void)
-{
-    int op;
-    int first_try = 1;
-    int ret;  // Today: Add ret
-    do
-    {
-        if (first_try)
-        {
-            printf("Please select desired operation: ");
-        }
-        else
-        {
-            printf("Invalid Input. Please enter 1-4: ");
-        }
-        
-        ret = scanf("%d", &op);  // Today: Add ret check
-        if (ret != 1) {  // Today: Add feedback and flush
-            printf("Invalid input - numbers only\n");
-            while (getchar() != '\n');
-        }
-        first_try = 0;            
-    } while (op < MIN || op > MAX || ret != 1);  // Today: Add ret to condition
-    return op;
-}
-
-void show_menu(void)
-{
-    printf("Select your desired operation \n\n");
-    printf("(1) Add (2) Subtract\n");
-    printf("(3) Multiply (4) Divide\n\n");
-}
-
-float add(float x, float y)
-{
-    return x + y;
-}
-
-float subtract(float x, float y)
-{
-    return x - y;
-}
-
-float multiply(float x, float y)
-{
-    return x * y;
-}
-
-float divide(float x, float y)
-{
-    return x / y;
 }
