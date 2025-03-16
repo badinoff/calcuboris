@@ -8,8 +8,8 @@ else
     MINOR=0
     PATCH=0
 fi
-COMMIT_COUNT=$(git rev-list --count master 2>/dev/null || echo 0)
-PATCH=$((COMMIT_COUNT - 1))  # Start from commit 2 = .01
+COMMIT_COUNT=$(git rev-list --count main 2>/dev/null || echo 0)
+PATCH=$COMMIT_COUNT  # Fixed: No -1
 if [ $PATCH -gt 99 ]; then
     PATCH=99
 fi
