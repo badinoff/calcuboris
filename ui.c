@@ -6,7 +6,7 @@
 
 void show_menu(void)
 {
-    printf("Select your desired operation \n\n");
+    printf("\nSelect your desired operation \n\n");
     printf("(1) Add (2) Subtract\n");
     printf("(3) Multiply (4) Divide\n\n");
 }
