@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include <math.h>  // Added for fabs()
-#include "version.h"
+#include <math.h>
 #include "calc_ops.h"
 #include "ui.h"
 #ifdef _WIN32
@@ -9,20 +8,14 @@
 
 int main(void)
 {
-
-    int c;    //char c;  //Used to check if user wants to continue or exit
-
-    printf("CalcuBoris v%d.%d.%02d -- Press Enter", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
-    c = getchar();
-    while (c != '\n' && c != EOF) c = getchar();
+    if (init_app()) return 0; // ESC exits, Enter continues
 
     do {
         float x = get_number("Please enter your first number: ");
-        float y = get_number("Please enter your second number: ");    
+        float y = get_number("Please enter your second number: ");
 
         show_menu();
-        
-        int op = get_operation();       //Picks math op (1=add, 2=sub, etc.)
+        int op = get_operation();
 
         float result;
         switch (op) {
@@ -53,14 +46,7 @@ int main(void)
             default: printf("That's not an option. Try again\n"); break;
         }
 
-        printf("To exit press 'q', to perform another calculation, press Enter\n");
-        while (getchar() != '\n');
-#ifdef _WIN32
-        c = _getch();
-#else
-        c = getchar();
-#endif
-    } while (c != 'q');
+    } while (continue_calc());
     
     return 0;
 }
