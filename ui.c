@@ -36,3 +36,17 @@ int get_operation(void)
     } while (op < MIN || op > MAX || ret != 1);
     return op;
 }
+
+float get_number(const char *prompt) {
+    float num;
+    int ret;
+    do {
+        printf("%s", prompt);
+        ret = scanf("%f", &num); 
+        if (ret != 1) {
+            printf("Invalid input - numbers only\n");
+            while (getchar() != '\n');
+        }
+    } while (ret != 1);
+    return num;
+}

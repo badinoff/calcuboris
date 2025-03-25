@@ -4,40 +4,25 @@
 #include "calc_ops.h"
 #include "ui.h"
 #ifdef _WIN32
-#include <conio.h>
+//#include <conio.h>
 #endif
 
 int main(void)
 {
-    float x, y;
-    int c;
+
+    int c;    //char c;  //Used to check if user wants to continue or exit
 
     printf("CalcuBoris v%d.%d.%02d -- Press Enter", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
     c = getchar();
     while (c != '\n' && c != EOF) c = getchar();
 
     do {
-        int ret;
-        do {
-            printf("Please enter your first number: ");
-            ret = scanf("%f", &x);
-            if (ret != 1) {
-                printf("Invalid input - numbers only\n");
-                while (getchar() != '\n');
-            }
-        } while (ret != 1);
-        
-        do {
-            printf("Please enter your second number: ");
-            ret = scanf("%f", &y);
-            if (ret != 1) {
-                printf("Invalid input - numbers only\n");
-                while (getchar() != '\n');
-            }
-        } while (ret != 1);
-        
+        float x = get_number("Please enter your first number: ");
+        float y = get_number("Please enter your second number: ");    
+
         show_menu();
-        int op = get_operation();
+        
+        int op = get_operation();       //Picks math op (1=add, 2=sub, etc.)
 
         float result;
         switch (op) {
