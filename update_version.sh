@@ -8,8 +8,13 @@ else
     MINOR=0
     PATCH=0
 fi
-COMMIT_COUNT=$(git rev-list --count main 2>/dev/null || echo 0)
-PATCH=$COMMIT_COUNT  # Fixed: No -1
+# Get last committed PATCH
+LAST_PATCH=$(git show origin/main:version.h 2>/dev/null | grep VERSION_PATCH | awk '{print $3}' || echo 0)
+if [ "$PATCH" -eq "$LAST_PATCH" ]; then
+    # No manual change - bump it
+    PATCH=$((PATCH + 1))
+fi
+# If PATCH differs (manual edit) - keep it
 if [ $PATCH -gt 99 ]; then
     PATCH=99
 fi
