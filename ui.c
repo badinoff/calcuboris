@@ -42,12 +42,11 @@ int get_operation(void)
     return op;
 }
 
-float get_number(const char *prompt) {  //float input prompts (from main.c) and collection 
+float get_number(const char *prompt) {  //float input prompts (from main.c) and collection  
     float num;
     int ret;
     do {
         printf("%s", prompt);
-        // while (getchar() != '\n' && getchar() != EOF); // Clear input buffer
         ret = scanf("%f", &num); 
         while (getchar() != '\n');
         if (ret != 1) {
