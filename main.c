@@ -3,7 +3,6 @@
 #include "calc_ops.h"
 #include "ui.h"
 #ifdef _WIN32
-//#include <conio.h>
 #endif
 
 int main(void)
@@ -11,7 +10,7 @@ int main(void)
     if (init_app()) return 0; // ESC exits, Enter continues 
 
     do {
-        float x = get_number("Please enter your first number: ");
+        float x = get_number("\nPlease enter your first number: ");
         float y = get_number("Please enter your second number: ");
 
         show_menu();
